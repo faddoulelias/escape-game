@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="520" height="518" viewBox="0 0 520 518" fill="none" stroke="none" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradient_1" gradientUnits="userSpaceOnUse" x1="95.27" y1="0" x2="95.27" y2="278.27">
+      <stop offset="0" stop-color="#16A068" />
+      <stop offset="1" stop-color="#F4E83F" />
+    </linearGradient>
+  </defs>
+  <g id="Remote Desktop" opacity="1" transform="translate(25 25)">
+    <path d="M470 0L470 0L470 468L0 468L0 0L470 0Z" style="mix-blend-mode:normal;" />
+    <path id="Shape" d="M190.541 0L101.622 88.5405L190.541 177.081M0 101.189L88.9189 189.73L0 278.27" style="fill:none;stroke-width:50;stroke:url(#gradient_1);stroke-linecap:round;stroke-linejoin:round;mix-blend-mode:normal;" transform="translate(139.73 94.865)" />
+  </g>
+</svg>

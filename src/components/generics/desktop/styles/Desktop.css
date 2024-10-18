@@ -1,0 +1,10 @@
+.desktop {
+  display: flex;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../../../../../public/resources/wallpaper.jpg");
+  background-size: cover;
+  overflow: hidden;
+  overflow-y: auto;
+}
