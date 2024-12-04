@@ -6,4 +6,5 @@
   align-items: center;
   justify-content: center;
   background-color: #ccf;
+  user-select: none;
 }

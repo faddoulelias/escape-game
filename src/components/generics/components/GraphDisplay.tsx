@@ -21,7 +21,12 @@ export default function GraphDisplay(props: GraphProps) {
     const setHovered = (index: number, isHovered: boolean) => {
         setNodeMap(nodeMap.map((item, i) => i === index ? { isHovered, node: item.node } : item))
     }
-    const isEdgeActive = (edge: Edge) => edge.source.active || edge.target.active
+
+    const getNodeColor = (node: Node) => {
+        if (node.active) return '#2e2';
+        if (props.graph.isReachable(node)) return '#f90';
+        return '#922';
+    }
 
     return (
         <svg className='graph' viewBox="0 0 1920 1080">
@@ -32,9 +37,9 @@ export default function GraphDisplay(props: GraphProps) {
                     y1={edge.source.position.y}
                     x2={edge.target.position.x}
                     y2={edge.target.position.y}
-                    stroke={isEdgeActive(edge) ? '#000' : '#888'}
-                    strokeWidth={isEdgeActive(edge) ? 10 : 8}
-                    strokeDasharray={isEdgeActive(edge) ? '0' : '20 20'}
+                    stroke={props.graph.isPathOpen(edge) ? '#000' : '#888'}
+                    strokeWidth={props.graph.isPathOpen(edge) ? 10 : 8}
+                    strokeDasharray={props.graph.isPathOpen(edge) ? '0' : '20 20'}
                 />
             ))}
             {nodeMap.map((nodeItem, index) => (
@@ -47,7 +52,7 @@ export default function GraphDisplay(props: GraphProps) {
                         onMouseEnter={() => setHovered(index, true)}
                         onMouseLeave={() => setHovered(index, false)}
                         r={nodeItem.isHovered ? 40 : 20}
-                        fill={nodeItem.node.active ? '#2e2' : '#e22'}
+                        fill={getNodeColor(nodeItem.node)}
                         stroke='black'
                         strokeWidth={5}
                         onClick={() => { if (props.onNodeClick) props.onNodeClick(nodeItem.node) }}
@@ -60,7 +65,7 @@ export default function GraphDisplay(props: GraphProps) {
                         fontWeight={700}
                         stroke='white'
                         strokeWidth={1}
-                    >{nodeItem.node.title}</text>
+                    >{nodeItem.node.id}</text>
                 </g>
             ))}
         </svg>

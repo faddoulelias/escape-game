@@ -21,10 +21,13 @@ enum ResizeDirection {
 interface WindowProps {
     title: string,
     children: React.ReactNode,
-    icon?: string,
-    hasFocus?: boolean,
-    zIndex?: number
-    onFocus?: () => void
+    icon: string,
+    hasFocus: boolean,
+    isMinimized: boolean,
+    zIndex: number,
+    onFocus: () => void
+    onMinimize: () => void
+    onClose: () => void
 }
 
 function getCursor(direction: ResizeDirection) {
@@ -47,6 +50,7 @@ export default function Window(props: WindowProps): JSX.Element {
     const [isResizing, setIsResizing] = React.useState<boolean>(false);
     const [canResize, setCanResize] = React.useState<ResizeDirection>(ResizeDirection.NONE);
     const [mousePosition, setMousePosition] = React.useState<{ x: number, y: number }>({ x: 0, y: 0 });
+    const [isMaximized, setIsMaximized] = React.useState<boolean>(false);
 
     const reference = React.useRef<HTMLDivElement>(null);
 
@@ -107,7 +111,7 @@ export default function Window(props: WindowProps): JSX.Element {
     }, [mousePosition]);
 
     const toStyle = (info: WindowInformation) => {
-        return {
+        if (!isMaximized) return {
             left: info.x,
             top: info.y,
             width: info.width,
@@ -150,14 +154,17 @@ export default function Window(props: WindowProps): JSX.Element {
     }
 
     return (
-        <div className="window" style={
-            {
+        <div
+            className={"window"
+                + (props.isMinimized ? " hidden" : "")
+                + (isMaximized ? " maximized" : "")
+            }
+            style={{
                 ...toStyle(windowInfo),
                 cursor: canResize ? getCursor(canResize) : 'default',
                 userSelect: isMoving || isResizing ? 'none' : 'auto',
                 zIndex: props.zIndex ?? 0
-            }
-        }
+            }}
             onMouseDown={handleMouseDown}
             ref={reference}
         >
@@ -181,9 +188,27 @@ export default function Window(props: WindowProps): JSX.Element {
                     {props.title}
                 </h1>
                 <div className="title-bar-controls">
-                    <button className="title-bar-controls-button" aria-label="Minimize">&#128469;&#xFE0E;</button>
-                    <button className="title-bar-controls-button" aria-label="Maximize">&#128470;&#xFE0E;</button>
-                    <button className="title-bar-controls-button close-button" aria-label="Close">&#128473;&#xFE0E;</button>
+                    <button
+                        className="title-bar-controls-button"
+                        aria-label="Minimize"
+                        onClick={props.onMinimize}
+                    >
+                        &#128469;&#xFE0E;
+                    </button>
+                    <button
+                        className="title-bar-controls-button"
+                        aria-label="Maximize"
+                        onClick={() => setIsMaximized(!isMaximized)}
+                    >
+                        &#128470;&#xFE0E;
+                    </button>
+                    <button
+                        className="title-bar-controls-button close-button"
+                        aria-label="Close"
+                        onClick={props.onClose}
+                    >
+                        &#128473;&#xFE0E;
+                    </button>
                 </div>
             </div >
             <div className="window-body">

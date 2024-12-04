@@ -4,7 +4,7 @@ export type Position = {
 }
 
 export type Node = {
-    title: string
+    id: string
     position: Position
     active: boolean
 }
@@ -14,6 +14,16 @@ export type Edge = {
     target: Node
 }
 
+
+interface GraphJSON {
+    nodes: Node[]
+    edgesDefinition: {
+        from: string
+        to: string
+    }[]
+}
+
+
 export default class Graph {
     private nodes: Node[]
     private edges: Edge[]
@@ -21,6 +31,24 @@ export default class Graph {
     constructor(nodes: Node[], edges: Edge[]) {
         this.nodes = nodes
         this.edges = edges
+    }
+
+    static fromJSON(json: GraphJSON) {
+        const graph = new Graph([], []);
+        graph.nodes = json.nodes
+        graph.edges = json.edgesDefinition.map(({ from, to }) => {
+            const source = graph.getNodeById(from);
+            const target = graph.getNodeById(to);
+            if (!source || !target) {
+                throw new Error('Node not found');
+            }
+            return { source, target }
+        });
+        return graph
+    }
+
+    static fromGraph(graph: Graph) {
+        return new Graph([...graph.nodes], [...graph.edges])
     }
 
     addNode(node: Node) {
@@ -35,25 +63,29 @@ export default class Graph {
         this.addEdge({ source, target })
     }
 
-    addEdgeByTitles(sourceTitle: string, targetTitle: string) {
-        const source = this.getNodeByTitle(sourceTitle)
-        const target = this.getNodeByTitle(targetTitle)
+    addEdgeByIds(sourceId: string, targetId: string) {
+        const source = this.getNodeById(sourceId)
+        const target = this.getNodeById(targetId)
         if (!source || !target) {
             throw new Error('Node not found')
         }
         this.addEdge({ source, target });
     }
 
-    getNodeByTitle(title: string) {
-        return this.nodes.find(node => node.title === title)
+    getAttachedEdges(node: Node) {
+        return this.edges.filter(edge => edge.source === node || edge.target === node)
     }
 
-    activateNode(title: string) {
-        const node = this.getNodeByTitle(title)
-        if (!node) {
-            throw new Error('Node not found')
-        }
-        node.active = true
+    getNodeById(id: string) {
+        return this.nodes.find(node => node.id === id)
+    }
+
+    isPathOpen(edge: Edge) {
+        return edge.source.active || edge.target.active
+    }
+
+    isReachable(node: Node) {
+        return this.getAttachedEdges(node).some(edge => this.isPathOpen(edge))
     }
 
     removeNode(node: Node) {

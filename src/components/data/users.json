@@ -1,0 +1,79 @@
+[
+  {
+    "id": "Douze",
+    "username": "Yann Douze",
+    "password": "lpwan",
+    "passwordHint": "Réseau à faible puissance et faible portée, utilisé pour connecter des appareils intelligents.",
+    "profilePicture": "res/profile/Douze.jpg"
+  },
+  {
+    "id": "Selami",
+    "username": "Yamine Selami",
+    "password": "stuffing",
+    "passwordHint": "Technique utilisée pour garantir que les données ne sont pas corrompues dans un bus de communication, par l'ajout de bits supplémentaires.",
+    "profilePicture": "res/profile/Selami.jpg"
+  },
+  {
+    "id": "Tauzin",
+    "username": "Philippe Tauzin",
+    "password": "soldes",
+    "passwordHint": "Saison des __ a maltes en fevrier",
+    "profilePicture": "res/profile/Tauzin.jpg"
+  },
+  {
+    "id": "Darga",
+    "username": "Anouna Darga",
+    "password": "nvic",
+    "passwordHint": "Ce contrôleur dispose d'un composant essentiel pour gérer les interruptions, connu sous le nom de contrôleur d'interruption vecteur.",
+    "profilePicture": "res/profile/Darga.jpg"
+  },
+  {
+    "id": "Pecheux",
+    "username": "Francois Pecheux",
+    "password": "join",
+    "passwordHint": "Ce mot-clé SQL permet de combiner des données provenant de plusieurs tables, en établissant une relation basée sur des colonnes partagées.",
+    "profilePicture": "res/profile/Pecheux.jpg"
+  },
+  {
+    "id": "Bovo",
+    "username": "Nicolas Bovo",
+    "password": "routh",
+    "passwordHint": "Nom d'une méthode qui aide à analyser la stabilité des systèmes dynamiques.",
+    "profilePicture": "res/profile/Bovo.jpg"
+  },
+  {
+    "id": "Marchetti",
+    "username": "Marchetti",
+    "password": "implements",
+    "passwordHint": "Mot-clé utilisé pour indiquer qu'une classe ou une méthode suit une interface spécifiée.",
+    "profilePicture": "res/profile/Marchetti.jpg"
+  },
+  {
+    "id": "Morot",
+    "username": "Cathy Morot",
+    "password": "loulous",
+    "passwordHint": "Salut mes ___!",
+    "profilePicture": "res/profile/Morot.jpg"
+  },
+  {
+    "id": "Sammier",
+    "username": "Pierre-Henry Sammier",
+    "password": "oscillateur",
+    "passwordHint": "Dispositif qui change des signaux électriques en variations continues.",
+    "profilePicture": "res/profile/Sammier.jpg"
+  },
+  {
+    "id": "Base de données",
+    "username": "Base de données",
+    "password": "password",
+    "passwordHint": "",
+    "profilePicture": "res/profile/BDD.jpg"
+  },
+  {
+    "id": "Bras",
+    "username": "Francis Bras",
+    "password": "mutex",
+    "passwordHint": "Un mécanisme utilisé pour assurer l'accès à des ressources partagées dans un environnement multitâche.",
+    "profilePicture": "res/profile/Bras.jpg"
+  }
+]

@@ -5,18 +5,29 @@ import SuccessPage from '../components/SuccessPage'
 
 
 export type WindowLoginUser = {
-    name: string,
-    username: string
-    password: string
-    passwordHint: string
+    id: string,
+    username: string,
+    password: string,
+    passwordHint: string,
+    profilePicture: string,
+    isLogged: boolean
 }
 
 interface WindowLoginProps {
-    user?: WindowLoginUser
-    type?: 'success' | 'error' | 'normal'
+    user: WindowLoginUser | null,
+    onSuccess: (user: WindowLoginUser) => void
+    type: 'success' | 'error' | 'normal'
 }
 
 export default function WindowLogin(props: WindowLoginProps) {
+    const [password, setPassword] = React.useState('')
+
+    const checkPassword = () => {
+        if (props.user && password === props.user.password) {
+            if (props.onSuccess) props.onSuccess(props.user)
+        }
+    }
+
     if (!props.user) return <ErrorPage
         title="No user provided"
         message="Please provide a user to the Window"
@@ -27,19 +38,21 @@ export default function WindowLogin(props: WindowLoginProps) {
     />;
     if (props.type === 'error') return <ErrorPage
         title="Error"
-        message="Unable to connect to the server"
+        message={`Unable to connect to user '${props.user.username}'`}
     />;
 
     return (
         <div className="window-login-container">
             < div className="window-login-form" >
-                <img
-                    className="window-login-form-icon"
-                    src="https://cdn-icons-png.flaticon.com/512/1077/1077012.png"
-                    alt="login"
-                />
+                <div className="window-login-form-icon"
+                    style={{
+                        backgroundImage: `url(${props.user.profilePicture})`,
+                        backgroundSize: 'cover'
+                    }}
+                >
+                </div>
                 <h1 className="window-login-form-title">
-                    {props.user.name}
+                    {props.user.id}
                 </h1>
                 <div className="window-login-form-input-div">
                     <input
@@ -47,8 +60,16 @@ export default function WindowLogin(props: WindowLoginProps) {
                         type="password"
                         placeholder="Password"
                         autoComplete="one-time-code"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') checkPassword()
+                        }}
                     />
-                    <button className="window-login-form-button">
+                    <button
+                        className="window-login-form-button"
+                        onClick={checkPassword}
+                    >
                         {"🡢"}
                     </button>
                 </div>

@@ -16,11 +16,15 @@ export default function Taskbar(props: TaskbarProps) {
 
             {props.processes.map((process, index) => (
                 <div key={index}
-                    className={"taskbar-app" + (process.isActive ? " active" : "")}
+                    className={"taskbar-app" + (process.hasFocus ? " active" : "")}
                     onClick={() => props.onAppClick ? props.onAppClick(process) : null}
                 >
                     <img src={process.app.icon} alt={process.app.name} />
-                    <hr className={"taskbar-app-line" + (process.hasFocus ? " active" : "")} />
+                    {
+                        (process.isRunning) ?
+                            <hr className={"taskbar-app-line" + (process.hasFocus ? " active" : "")} />
+                            : null
+                    }
                 </div>
             ))
             }

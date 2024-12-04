@@ -10,9 +10,6 @@
   color: white;
   gap: 5px;
   user-select: none;
-
-  position: fixed;
-  bottom: 0;
 }
 
 @keyframes hover {

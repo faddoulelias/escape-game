@@ -1,0 +1,48 @@
+{
+  "nodes": [
+    { "id": "Douze", "position": { "x": 265, "y": 229 }, "active": false },
+    { "id": "Selami", "position": { "x": 780, "y": 81 }, "active": false },
+    { "id": "Tauzin", "position": { "x": 1135, "y": 122 }, "active": false },
+    { "id": "Darga", "position": { "x": 635, "y": 500 }, "active": false },
+    {
+      "id": "Pecheux",
+      "position": { "x": 1620, "y": 354 },
+      "active": false
+    },
+    { "id": "Bovo", "position": { "x": 921, "y": 614 }, "active": false },
+    {
+      "id": "Marchetti",
+      "position": { "x": 1378, "y": 595 },
+      "active": false
+    },
+    { "id": "Morot", "position": { "x": 280, "y": 960 }, "active": true },
+    {
+      "id": "Sammier",
+      "position": { "x": 1606, "y": 865 },
+      "active": false
+    },
+    {
+      "id": "Base de données",
+      "position": { "x": 1158, "y": 372 },
+      "active": false
+    },
+    { "id": "Bras", "position": { "x": 1558, "y": 1072 }, "active": false }
+  ],
+  "edgesDefinition": [
+    { "from": "Douze", "to": "Darga" },
+    { "from": "Douze", "to": "Selami" },
+    { "from": "Douze", "to": "Morot" },
+    { "from": "Morot", "to": "Bovo" },
+    { "from": "Morot", "to": "Bras" },
+    { "from": "Morot", "to": "Sammier" },
+    { "from": "Pecheux", "to": "Marchetti" },
+    { "from": "Pecheux", "to": "Base de données" },
+    { "from": "Marchetti", "to": "Sammier" },
+    { "from": "Bovo", "to": "Marchetti" },
+    { "from": "Bovo", "to": "Base de données" },
+    { "from": "Bras", "to": "Sammier" },
+    { "from": "Darga", "to": "Tauzin" },
+    { "from": "Selami", "to": "Tauzin" },
+    { "from": "Tauzin", "to": "Pecheux" }
+  ]
+}
